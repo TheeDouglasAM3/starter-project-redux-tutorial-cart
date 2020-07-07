@@ -1,4 +1,4 @@
-//VIDEO PAROU EM 51:15
+//VIDEO PAROU EM 57:30
 import React from "react";
 // components
 import Navbar from "./components/Navbar";
@@ -8,28 +8,28 @@ import cartItems from "./cart-items";
 
 // redux stuff
 import {createStore} from 'redux'
-import { INCREASE, DECREASE } from './actions'
 import reducer from './reducer'
+
+import {Provider} from 'react-redux'
 
 //initial store 
 const initialStore = {
-  count: 0
+  cart: cartItems,
+  total: 10,
+  amount: 5
 }
 
 const store = createStore(reducer, initialStore)
-store.dispatch({type: INCREASE})
-store.dispatch({type: DECREASE})
-store.dispatch({type: INCREASE})
-console.log(store.getState())
+ 
 
 function App() {
   // cart setup
 
   return (
-    <main>
-      <Navbar cart={store.getState()} />
-      <CartContainer cart={cartItems} />
-    </main>
+    <Provider store={store}>
+      <Navbar />
+      <CartContainer />
+    </Provider>
   );
 }
 
