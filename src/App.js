@@ -1,25 +1,16 @@
-//VIDEO PAROU EM 57:30
 import React from "react";
 // components
 import Navbar from "./components/Navbar";
 import CartContainer from "./components/CartContainer";
-// items
-import cartItems from "./cart-items";
 
 // redux stuff
 import {createStore} from 'redux'
 import reducer from './reducer'
 
-import {Provider} from 'react-redux'
+import {Provider} from 'react-redux' 
 
-//initial store 
-const initialStore = {
-  cart: cartItems,
-  total: 10,
-  amount: 5
-}
 
-const store = createStore(reducer, initialStore)
+const store = createStore(reducer)
  
 
 function App() {
