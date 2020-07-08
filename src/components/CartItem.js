@@ -1,8 +1,8 @@
 import React from "react";
 import {connect} from 'react-redux'
-import {DECREASE, INCREASE, REMOVE} from '../actions'
+import {DECREASE, INCREASE, REMOVE, TOGGLE_AMOUNT} from '../actions'
 
-const CartItem = ({ img, title, price, amount, remove, increase, decrease }) => {
+const CartItem = ({ img, title, price, amount, remove, increase, decrease, toggle }) => {
   return (
     <div className="cart-item">
       <img src={img} alt={title} />
@@ -20,7 +20,7 @@ const CartItem = ({ img, title, price, amount, remove, increase, decrease }) => 
       <div>
         {/* increase amount */}
         <button 
-          onClick={() => increase()}
+          onClick={() => toggle("inc")}
           className="amount-btn"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -32,7 +32,13 @@ const CartItem = ({ img, title, price, amount, remove, increase, decrease }) => 
         {/* decrease amount */}
         <button 
           className="amount-btn"
-          onClick={() => decrease()}
+          onClick={() => {
+            if(amount === 1){
+              return remove()
+            } else {
+              return toggle("dec")
+            }
+          }}
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
@@ -51,12 +57,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     remove: () => dispatch({ 
       type: REMOVE, payload:{id: id} 
     }),
-    increase: () => dispatch({ 
-      type: INCREASE, payload:{id: id, amount: amount} 
-    }),
-    decrease: () => dispatch({ 
-      type: DECREASE, payload:{id: id, amount: amount} 
-    }),
+    // increase: () => dispatch({ 
+    //   type: INCREASE, payload:{id: id, amount: amount} 
+    // }),
+    // decrease: () => dispatch({ 
+    //   type: DECREASE, payload:{id: id, amount: amount} 
+    // }),
+    toggle: (toggle) => dispatch({
+      type: TOGGLE_AMOUNT, payload:{id, toggle}
+    })
   }
 }
 
