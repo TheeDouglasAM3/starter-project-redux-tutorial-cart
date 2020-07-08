@@ -14,7 +14,18 @@ function reducer(state, action) {
 
     if(action.type === INCREASE){
 
-        console.log("you increased amount")
+        let tempCart = state.cart.map((cartItem) => {
+            if(cartItem.id === action.payload.id){
+                cartItem = {...cartItem, amount: cartItem.amount + 1}
+                return cartItem
+            }
+            return cartItem
+        })
+        
+        return {
+            ...state, 
+            cart: tempCart
+        }
     }
 
     if(action.type === REMOVE){
