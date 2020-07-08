@@ -7,7 +7,7 @@ const CartContainer = ({ cart = [], total, dispatch }) => {
 
   React.useEffect(() => {
     dispatch({type:GET_TOTALS})
-  }, [cart])
+  }, [cart, dispatch])
 
   if (cart.length === 0) {
     return (
